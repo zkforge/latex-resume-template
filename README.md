@@ -2,6 +2,10 @@
 
 这是一个可直接编译的中文单页简历模板，适合作为个人简历、项目经历整理或求职材料的起点。仓库内只包含占位内容，不包含任何真实个人信息或真实项目经历。
 
+## 预览
+
+![简历模板预览](assets/preview.png)
+
 ## 快速开始
 
 本模板需要使用 XeLaTeX 编译。
@@ -23,7 +27,7 @@ xelatex main.tex
 ```text
 .
 ├── .github/workflows/build.yml  # GitHub Actions 自动编译配置
-├── assets/                      # 可选图片目录
+├── assets/                      # 预览图与可选图片目录
 ├── main.tex                     # 简历模板源码
 ├── Makefile                     # 本地构建与清理命令
 ├── README.md                    # 使用说明
