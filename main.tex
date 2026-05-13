@@ -1,0 +1,165 @@
+% !TEX program = xelatex
+\documentclass[UTF8,10pt,a4paper]{ctexart}
+
+\usepackage[
+  left=1.25cm,
+  right=1.25cm,
+  top=1.0cm,
+  bottom=1.0cm,
+]{geometry}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{fontawesome5}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{tabularx}
+\usepackage{xcolor}
+
+\hypersetup{
+  colorlinks=true,
+  urlcolor=black,
+  linkcolor=black,
+}
+
+% 优先使用跨平台字体；若本机没有对应字体，则回退到 macOS 常见字体。
+\IfFontExistsTF{TeX Gyre Termes}{\setmainfont{TeX Gyre Termes}}{\setmainfont{Times New Roman}}
+\IfFontExistsTF{Noto Serif CJK SC}{\setCJKmainfont{Noto Serif CJK SC}}{\setCJKmainfont{Songti SC}}
+\IfFontExistsTF{Noto Sans CJK SC}{%
+  \setCJKsansfont{Noto Sans CJK SC}
+  \newCJKfontfamily\resumeheiti{Noto Sans CJK SC}
+}{%
+  \setCJKsansfont{Heiti SC}
+  \newCJKfontfamily\resumeheiti{Heiti SC}
+}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\tabcolsep}{0pt}
+\renewcommand{\arraystretch}{1.12}
+
+% 模板颜色集中放在这里，后续只需要改这一处即可整体换风格。
+\definecolor{resumeText}{HTML}{1E1E1E}
+\definecolor{resumeMuted}{HTML}{555555}
+\definecolor{resumeBlue}{HTML}{1F3A4A}
+\definecolor{resumeRule}{HTML}{1F3A4A}
+\definecolor{resumePhotoBg}{HTML}{F7F7F7}
+\color{resumeText}
+
+\newcommand{\resumeSection}[2]{%
+  \vspace{0.55em}%
+  {\resumeheiti\large\color{resumeBlue}#1\hspace{0.45em}#2}\par
+  \vspace{0.12em}%
+  {\color{resumeRule}\hrule height 1.45pt}%
+  \vspace{0.35em}%
+}
+
+\newcommand{\resumeContact}[2]{%
+  {\color{resumeBlue}\faIcon{#1}}\hspace{0.35em}#2%
+}
+
+\newcommand{\resumeEducation}[4]{%
+  {\resumeheiti\bfseries #1} & #2 & \hfill #3 & \hfill #4\\
+}
+
+\newcommand{\projectTitle}[5]{%
+  \vspace{0.25em}%
+  {\large{\color{resumeBlue}\faIcon{code-branch}}\hspace{0.45em}\textbf{#1}%
+  {\normalsize\hspace{0.55em}{\color{resumeMuted}#2｜#3}}%
+  \hfill{\normalsize\bfseries\href{#4}{{\color{resumeBlue}\faIcon{github}}\hspace{0.25em}#5}}}\par
+  \vspace{0.15em}%
+}
+
+\newcommand{\resumeLabel}[1]{%
+  \textbf{#1：}%
+}
+
+\newcommand{\resumeItem}[2]{%
+  \item \textbf{#1：}#2%
+}
+
+\newenvironment{resumeItemize}{%
+  \begin{enumerate}[
+    label=\textbf{\arabic*）},
+    leftmargin=1.8em,
+    itemsep=0.08em,
+    topsep=0.12em,
+    parsep=0pt,
+    partopsep=0pt
+  ]%
+}{%
+  \end{enumerate}%
+}
+
+% 若需要使用真实照片，请把图片放入 assets/photo.png，并将下方路径改为该文件。
+\newcommand{\resumePhotoFile}{assets/photo.png}
+\newcommand{\resumePhoto}{%
+  \IfFileExists{\resumePhotoFile}{%
+    \includegraphics[height=2.7cm]{\resumePhotoFile}%
+  }{%
+    \fcolorbox{resumeRule}{resumePhotoBg}{%
+      \parbox[c][2.55cm][c]{2.05cm}{\centering\small 证件照}%
+    }%
+  }%
+}
+
+\begin{document}
+
+\begin{minipage}[c]{0.78\textwidth}
+  {\Huge\textbf{你的姓名}}\par
+  \vspace{0.22em}
+  {\renewcommand{\arraystretch}{0.82}
+  \begin{tabularx}{\textwidth}{@{}X X@{}}
+    \resumeContact{phone}{Tel：000-0000-0000} &
+    \resumeContact{rss}{Blog：\href{https://example.com/}{example.com}}\\[-0.18em]
+    \resumeContact{envelope}{Email：\href{mailto:name@example.com}{name@example.com}} &
+    \resumeContact{github}{Github：\href{https://github.com/yourname}{github.com/yourname}}\\
+  \end{tabularx}}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.16\textwidth}
+  \raggedleft
+  \resumePhoto
+\end{minipage}
+
+\resumeSection{\faIcon{graduation-cap}}{教育经历}
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{4.55cm}>{\raggedright\arraybackslash}X>{\raggedleft\arraybackslash}p{2.2cm}>{\raggedleft\arraybackslash}p{3.0cm}@{}}
+  \resumeEducation{学校名称}{学历｜学院或专业方向}{城市}{起止时间}
+  \resumeEducation{学校名称}{学历｜学院或专业方向}{城市}{起止时间}
+\end{tabularx}
+
+\resumeSection{\faIcon{briefcase}}{项目经历}
+\projectTitle{项目名称一}{角色}{起止时间}{https://github.com/yourname/project-one}{Github}
+\resumeLabel{项目简介}用一到两句话概括项目目标、应用场景、你的核心职责和最终交付物，避免堆砌工具名称。\par
+\vspace{0.12em}
+\resumeLabel{技术栈}技术一、技术二、技术三、技术四
+\begin{resumeItemize}
+  \resumeItem{问题拆解}{说明你如何识别关键问题，并把模糊需求拆成可执行模块。}
+  \resumeItem{方案设计}{说明核心技术方案、数据流或系统结构，突出为什么这样设计。}
+  \resumeItem{工程实现}{说明你负责的关键模块、接口、训练流程、部署流程或自动化验证流程。}
+  \resumeItem{结果量化}{使用可验证指标描述效果，例如准确率、延迟、吞吐、成本、覆盖率或人工效率提升。}
+\end{resumeItemize}
+
+\projectTitle{项目名称二}{角色}{起止时间}{https://github.com/yourname/project-two}{Github}
+\resumeLabel{项目简介}补充另一个能体现差异化能力的项目，重点展示问题背景、技术选择和可复现结果。\par
+\vspace{0.12em}
+\resumeLabel{技术栈}技术一、技术二、技术三、技术四
+\begin{resumeItemize}
+  \resumeItem{架构设计}{说明模块边界、输入输出和主要依赖，让阅读者快速理解系统形态。}
+  \resumeItem{关键优化}{说明你做过的性能、稳定性、效果或体验优化，以及优化前后的差异。}
+  \resumeItem{异常处理}{说明你如何处理失败路径、边界条件、数据质量或资源限制。}
+  \resumeItem{沉淀复用}{说明项目中可复用的脚本、组件、文档、测试或评估方法。}
+\end{resumeItemize}
+
+\resumeSection{\faIcon{certificate}}{技能/证书/竞赛}
+\resumeLabel{证书}证书一、证书二、证书三\par
+\vspace{0.12em}
+\resumeLabel{编程与工程}语言、框架、操作系统、容器、数据库、测试或部署能力。\par
+\vspace{0.06em}
+\resumeLabel{模型与算法}模型、算法、训练方法、评估指标或优化经验。\par
+\vspace{0.06em}
+\resumeLabel{系统与工具}检索、Agent、数据处理、可观测性、自动化工程或协作工具。\par
+\vspace{0.12em}
+\resumeLabel{竞赛/荣誉}竞赛名称、奖项等级、排名或其他可验证成果。
+
+\end{document}
