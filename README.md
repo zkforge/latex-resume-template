@@ -6,6 +6,8 @@
 
 ![简历模板预览](assets/preview.png)
 
+[点击查看 PDF 版本](main.pdf)
+
 ## 快速开始
 
 本模板需要使用 XeLaTeX 编译。
@@ -28,6 +30,7 @@ xelatex main.tex
 .
 ├── .github/workflows/build.yml  # GitHub Actions 自动编译配置
 ├── assets/                      # 预览图与可选图片目录
+├── main.pdf                     # 可直接查看的模板 PDF
 ├── main.tex                     # 简历模板源码
 ├── Makefile                     # 本地构建与清理命令
 ├── README.md                    # 使用说明
