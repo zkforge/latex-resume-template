@@ -1,5 +1,5 @@
 % !TEX program = xelatex
-\documentclass[UTF8,10pt,a4paper]{ctexart}
+\documentclass[UTF8,10pt,a4paper,fontset=none]{ctexart}
 
 \usepackage[
   left=1.25cm,
@@ -9,7 +9,6 @@
 ]{geometry}
 \usepackage{array}
 \usepackage{enumitem}
-\usepackage{fontawesome5}
 \usepackage{graphicx}
 \usepackage{hyperref}
 \usepackage{tabularx}
@@ -35,8 +34,12 @@
 \pagestyle{empty}
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0pt}
-\setlength{\tabcolsep}{0pt}
-\renewcommand{\arraystretch}{1.12}
+\setlength{\tabcolsep}{0.35em}
+\spaceskip=0.34em plus 0.08em minus 0.04em
+\xspaceskip=0.42em plus 0.08em minus 0.04em
+\hyphenpenalty=10000
+\exhyphenpenalty=10000
+\xeCJKsetup{CJKecglue={\hskip 0.24em plus 0.04em minus 0.02em}}
 
 % 模板颜色集中放在这里，后续只需要改这一处即可整体换风格。
 \definecolor{resumeText}{HTML}{1E1E1E}
@@ -46,27 +49,28 @@
 \definecolor{resumePhotoBg}{HTML}{F7F7F7}
 \color{resumeText}
 
-\newcommand{\resumeSection}[2]{%
+\newcommand{\resumeSection}[1]{%
   \vspace{0.55em}%
-  {\resumeheiti\large\color{resumeBlue}#1\hspace{0.45em}#2}\par
+  {\resumeheiti\large\color{resumeBlue}#1}\par
   \vspace{0.12em}%
   {\color{resumeRule}\hrule height 1.45pt}%
   \vspace{0.35em}%
 }
 
-\newcommand{\resumeContact}[2]{%
-  {\color{resumeBlue}\faIcon{#1}}\hspace{0.35em}#2%
+\newcommand{\resumeContactRow}[4]{%
+  #1: #2 & #3: #4\\[-0.08em]
 }
 
 \newcommand{\resumeEducation}[4]{%
   {\resumeheiti\bfseries #1} & #2 & \hfill #3 & \hfill #4\\
 }
 
-\newcommand{\projectTitle}[5]{%
+\newcommand{\projectTitle}[4]{%
   \vspace{0.25em}%
-  {\large{\color{resumeBlue}\faIcon{code-branch}}\hspace{0.45em}\textbf{#1}%
-  {\normalsize\hspace{0.55em}{\color{resumeMuted}#2｜#3}}%
-  \hfill{\normalsize\bfseries\href{#4}{{\color{resumeBlue}\faIcon{github}}\hspace{0.25em}#5}}}\par
+  \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}X r@{}}
+    {\large\textbf{#1}} & {\color{resumeMuted}#2 | #3}\\[-0.05em]
+    \multicolumn{2}{@{}l@{}}{{\color{resumeMuted}项目地址: }\href{#4}{#4}}\\
+  \end{tabularx}\par
   \vspace{0.15em}%
 }
 
@@ -105,16 +109,14 @@
 
 \begin{document}
 
-\begin{minipage}[c]{0.78\textwidth}
+\begin{minipage}[c]{0.80\textwidth}
   {\Huge\textbf{你的姓名}}\par
   \vspace{0.22em}
-  {\renewcommand{\arraystretch}{0.82}
-  \begin{tabularx}{\textwidth}{@{}X X@{}}
-    \resumeContact{phone}{Tel：000-0000-0000} &
-    \resumeContact{rss}{Blog：\href{https://example.com/}{example.com}}\\[-0.18em]
-    \resumeContact{envelope}{Email：\href{mailto:name@example.com}{name@example.com}} &
-    \resumeContact{github}{Github：\href{https://github.com/yourname}{github.com/yourname}}\\
-  \end{tabularx}}
+  \begin{tabular*}{\textwidth}{@{}p{0.38\textwidth}@{\extracolsep{\fill}}p{0.56\textwidth}@{}}
+    \resumeContactRow{Tel}{000-0000-0000}{Email}{\href{mailto:name@example.com}{name@example.com}}
+    \resumeContactRow{Blog}{\href{https://example.com}{https://example.com}}{Github}{\href{https://github.com/yourname}{https://github.com/yourname}}
+    \resumeContactRow{意向城市}{城市一、城市二}{意向岗位}{目标岗位或实习类型}
+  \end{tabular*}
 \end{minipage}
 \hfill
 \begin{minipage}[c]{0.16\textwidth}
@@ -122,14 +124,14 @@
   \resumePhoto
 \end{minipage}
 
-\resumeSection{\faIcon{graduation-cap}}{教育经历}
-\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{4.55cm}>{\raggedright\arraybackslash}X>{\raggedleft\arraybackslash}p{2.2cm}>{\raggedleft\arraybackslash}p{3.0cm}@{}}
-  \resumeEducation{学校名称}{学历｜学院或专业方向}{城市}{起止时间}
-  \resumeEducation{学校名称}{学历｜学院或专业方向}{城市}{起止时间}
+\resumeSection{教育经历（Education）}
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{4.7cm}>{\raggedright\arraybackslash}X>{\raggedleft\arraybackslash}p{2.2cm}>{\raggedleft\arraybackslash}p{3.0cm}@{}}
+  \resumeEducation{学校名称{\small\color{resumeMuted}（标签）}}{学历｜学院｜专业方向}{城市}{\textbf{起止时间}}
+  \resumeEducation{学校名称{\small\color{resumeMuted}（标签）}}{学历｜学院｜专业方向}{城市}{\textbf{起止时间}}
 \end{tabularx}
 
-\resumeSection{\faIcon{briefcase}}{项目经历}
-\projectTitle{项目名称一}{角色}{起止时间}{https://github.com/yourname/project-one}{Github}
+\resumeSection{项目经历（Projects）}
+\projectTitle{项目名称一}{角色}{起止时间}{https://github.com/yourname/project-one}
 \resumeLabel{项目简介}用一到两句话概括项目目标、应用场景、你的核心职责和最终交付物，避免堆砌工具名称。\par
 \vspace{0.12em}
 \resumeLabel{技术栈}技术一、技术二、技术三、技术四
@@ -140,7 +142,7 @@
   \resumeItem{结果量化}{使用可验证指标描述效果，例如准确率、延迟、吞吐、成本、覆盖率或人工效率提升。}
 \end{resumeItemize}
 
-\projectTitle{项目名称二}{角色}{起止时间}{https://github.com/yourname/project-two}{Github}
+\projectTitle{项目名称二}{角色}{起止时间}{https://github.com/yourname/project-two}
 \resumeLabel{项目简介}补充另一个能体现差异化能力的项目，重点展示问题背景、技术选择和可复现结果。\par
 \vspace{0.12em}
 \resumeLabel{技术栈}技术一、技术二、技术三、技术四
@@ -151,15 +153,15 @@
   \resumeItem{沉淀复用}{说明项目中可复用的脚本、组件、文档、测试或评估方法。}
 \end{resumeItemize}
 
-\resumeSection{\faIcon{certificate}}{技能/证书/竞赛}
-\resumeLabel{证书}证书一、证书二、证书三\par
-\vspace{0.12em}
-\resumeLabel{编程与工程}语言、框架、操作系统、容器、数据库、测试或部署能力。\par
+\resumeSection{技能（Skills）}
+\resumeLabel{语言}证书或语言能力\par
 \vspace{0.06em}
-\resumeLabel{模型与算法}模型、算法、训练方法、评估指标或优化经验。\par
+\resumeLabel{编程}语言、框架、操作系统、容器、数据库、测试或部署能力。\par
 \vspace{0.06em}
-\resumeLabel{系统与工具}检索、Agent、数据处理、可观测性、自动化工程或协作工具。\par
-\vspace{0.12em}
-\resumeLabel{竞赛/荣誉}竞赛名称、奖项等级、排名或其他可验证成果。
+\resumeLabel{大模型}模型、算法、训练方法、评估指标或优化经验。\par
+\vspace{0.06em}
+\resumeLabel{智能体}检索、Agent、数据处理、工具调用、多轮对话或自动化工程能力。\par
+\vspace{0.06em}
+\resumeLabel{工具}开发工具、协作工具、实验管理或可复现工程能力。
 
 \end{document}
