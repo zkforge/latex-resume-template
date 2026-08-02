@@ -35,25 +35,24 @@
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0pt}
 \setlength{\tabcolsep}{0.35em}
-\spaceskip=0.34em plus 0.08em minus 0.04em
-\xspaceskip=0.42em plus 0.08em minus 0.04em
 \hyphenpenalty=10000
 \exhyphenpenalty=10000
-\xeCJKsetup{CJKecglue={\hskip 0.24em plus 0.04em minus 0.02em}}
+\xeCJKsetup{CJKecglue={\hskip 0.14em plus 0.03em minus 0.01em}}
 
 % 模板颜色集中放在这里，后续只需要改这一处即可整体换风格。
 \definecolor{resumeText}{HTML}{1E1E1E}
 \definecolor{resumeMuted}{HTML}{555555}
-\definecolor{resumeBlue}{HTML}{1F3A4A}
-\definecolor{resumeRule}{HTML}{1F3A4A}
+\definecolor{resumeBlue}{HTML}{1D3557}
+\definecolor{resumeRule}{HTML}{1D3557}
+\definecolor{resumeAccent}{HTML}{8A4B12}
 \definecolor{resumePhotoBg}{HTML}{F7F7F7}
 \color{resumeText}
 
 \newcommand{\resumeSection}[1]{%
   \vspace{0.55em}%
-  {\resumeheiti\large\color{resumeBlue}#1}\par
+  {\resumeheiti\Large\bfseries\color{resumeBlue}#1}\par
   \vspace{0.12em}%
-  {\color{resumeRule}\hrule height 1.45pt}%
+  {\color{resumeRule}\hrule height 2.2pt}%
   \vspace{0.35em}%
 }
 
@@ -61,25 +60,35 @@
   #1: #2 & #3: #4\\[-0.08em]
 }
 
-\newcommand{\resumeEducation}[4]{%
-  {\resumeheiti\bfseries #1} & #2 & \hfill #3 & \hfill #4\\
+\newcommand{\resumeEducation}[3]{%
+  {\resumeheiti\fontsize{11pt}{13.2pt}\selectfont\bfseries #1} & #2 & \hfill #3\\
 }
 
-\newcommand{\projectTitle}[4]{%
-  \vspace{0.25em}%
+\newcommand{\experienceTitle}[3]{%
   \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}X r@{}}
-    {\large\textbf{#1}} & {\color{resumeMuted}#2 | #3}\\[-0.05em]
-    \multicolumn{2}{@{}l@{}}{{\color{resumeMuted}项目地址: }\href{#4}{#4}}\\
+    {\resumeheiti\fontsize{11pt}{13.2pt}\selectfont\bfseries #1} &
+    {{\bfseries\color{resumeAccent}#2} {\color{resumeMuted}|} {\bfseries\color{resumeBlue}#3}}\\
   \end{tabularx}\par
-  \vspace{0.15em}%
+  \vspace{0.08em}%
+}
+
+\newcommand{\projectTitle}[5]{%
+  \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}X r@{}}
+    {\large\textbf{#1}} & {{\bfseries\color{resumeAccent}#2} {\color{resumeMuted}|} {\bfseries\color{resumeBlue}#3}}\\[-0.05em]
+    \if\relax\detokenize{#4}\relax
+    \else
+      \multicolumn{2}{@{}l@{}}{{\color{resumeMuted}项目链接: }\href{#4}{#5}}\\
+    \fi
+  \end{tabularx}\par
+  \vspace{0.12em}%
 }
 
 \newcommand{\resumeLabel}[1]{%
-  \textbf{#1：}%
+  {\resumeheiti\bfseries #1：}%
 }
 
 \newcommand{\resumeItem}[2]{%
-  \item \textbf{#1：}#2%
+  \item {\resumeheiti\bfseries #1：}#2%
 }
 
 \newenvironment{resumeItemize}{%
@@ -114,8 +123,8 @@
   \vspace{0.22em}
   \begin{tabular*}{\textwidth}{@{}p{0.38\textwidth}@{\extracolsep{\fill}}p{0.56\textwidth}@{}}
     \resumeContactRow{Tel}{000-0000-0000}{Email}{\href{mailto:name@example.com}{name@example.com}}
-    \resumeContactRow{Blog}{\href{https://example.com}{https://example.com}}{Github}{\href{https://github.com/yourname}{https://github.com/yourname}}
-    \resumeContactRow{意向城市}{城市一、城市二}{意向岗位}{目标岗位或实习类型}
+    \resumeContactRow{Blog}{\href{https://example.com}{example.com}}{GitHub}{\href{https://github.com/yourname}{github.com/yourname}}
+    \multicolumn{2}{@{}l@{}}{{\resumeheiti\bfseries\color{resumeBlue}目标岗位｜毕业年份/实习类型｜到岗时间｜可实习时长}}\\
   \end{tabular*}
 \end{minipage}
 \hfill
@@ -124,44 +133,43 @@
   \resumePhoto
 \end{minipage}
 
-\resumeSection{教育经历（Education）}
-\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{4.7cm}>{\raggedright\arraybackslash}X>{\raggedleft\arraybackslash}p{2.2cm}>{\raggedleft\arraybackslash}p{3.0cm}@{}}
-  \resumeEducation{学校名称{\small\color{resumeMuted}（标签）}}{学历｜学院｜专业方向}{城市}{\textbf{起止时间}}
-  \resumeEducation{学校名称{\small\color{resumeMuted}（标签）}}{学历｜学院｜专业方向}{城市}{\textbf{起止时间}}
+\resumeSection{教育经历}
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{6.0cm}>{\raggedright\arraybackslash}X>{\raggedleft\arraybackslash}p{3.0cm}@{}}
+  \resumeEducation{学校名称{\color{resumeMuted}（院校标签）}}{学历｜学院｜专业方向}{\textbf{起止时间}}
+  \resumeEducation{学校名称{\color{resumeMuted}（院校标签）}}{学历｜学院｜专业方向}{\textbf{起止时间}}
 \end{tabularx}
 
-\resumeSection{项目经历（Projects）}
-\projectTitle{项目名称一}{角色}{起止时间}{https://github.com/yourname/project-one}
-\resumeLabel{项目简介}用一到两句话概括项目目标、应用场景、你的核心职责和最终交付物，避免堆砌工具名称。\par
-\vspace{0.12em}
-\resumeLabel{技术栈}技术一、技术二、技术三、技术四
-\begin{resumeItemize}
-  \resumeItem{问题拆解}{说明你如何识别关键问题，并把模糊需求拆成可执行模块。}
-  \resumeItem{方案设计}{说明核心技术方案、数据流或系统结构，突出为什么这样设计。}
-  \resumeItem{工程实现}{说明你负责的关键模块、接口、训练流程、部署流程或自动化验证流程。}
-  \resumeItem{结果量化}{使用可验证指标描述效果，例如准确率、延迟、吞吐、成本、覆盖率或人工效率提升。}
-\end{resumeItemize}
-
-\projectTitle{项目名称二}{角色}{起止时间}{https://github.com/yourname/project-two}
-\resumeLabel{项目简介}补充另一个能体现差异化能力的项目，重点展示问题背景、技术选择和可复现结果。\par
-\vspace{0.12em}
-\resumeLabel{技术栈}技术一、技术二、技术三、技术四
-\begin{resumeItemize}
-  \resumeItem{架构设计}{说明模块边界、输入输出和主要依赖，让阅读者快速理解系统形态。}
-  \resumeItem{关键优化}{说明你做过的性能、稳定性、效果或体验优化，以及优化前后的差异。}
-  \resumeItem{异常处理}{说明你如何处理失败路径、边界条件、数据质量或资源限制。}
-  \resumeItem{沉淀复用}{说明项目中可复用的脚本、组件、文档、测试或评估方法。}
-\end{resumeItemize}
-
-\resumeSection{技能（Skills）}
-\resumeLabel{语言}证书或语言能力\par
-\vspace{0.06em}
-\resumeLabel{编程}语言、框架、操作系统、容器、数据库、测试或部署能力。\par
-\vspace{0.06em}
-\resumeLabel{大模型}模型、算法、训练方法、评估指标或优化经验。\par
-\vspace{0.06em}
-\resumeLabel{智能体}检索、Agent、数据处理、工具调用、多轮对话或自动化工程能力。\par
-\vspace{0.06em}
+\resumeSection{技能}
+\resumeLabel{语言}语言证书或沟通能力。\par
+\resumeLabel{编程}主要语言、框架、数据库及数据处理能力。\par
+\resumeLabel{专业方向}与你的目标岗位直接相关的模型、算法或系统能力。\par
+\resumeLabel{工程化}部署、测试、版本控制、日志排查与服务联调能力。\par
 \resumeLabel{工具}开发工具、协作工具、实验管理或可复现工程能力。
+
+\resumeSection{实习经历}
+\experienceTitle{公司名称}{岗位名称}{起止时间}
+\resumeLabel{业务或产品名称一}\par
+\begin{resumeItemize}
+  \resumeItem{核心方案}{针对原有流程在准确率、处理时延或人工成本上的限制，设计“输入解析 → 任务拆分 → 模型处理 → 结果校验”的完整链路，说明你负责的模块、关键设计取舍及它解决的具体问题。}
+  \resumeItem{数据与模型}{构建数据解析、清洗、检索、训练或推理流程，将原始内容与页面位置、业务字段等证据绑定；通过分块、路由或多阶段复核处理上下文限制，并让最终结果可以回溯。}
+  \resumeItem{工程结果}{实现支持并发、超时、重试、取消和状态回调的任务执行机制，补充日志、缓存、监控或部署流程；在明确的测试条件下，将关键指标由基线值提升到目标值。}
+\end{resumeItemize}
+\resumeLabel{业务或产品名称二}\par
+\begin{resumeItemize}
+  \resumeItem{系统实现}{负责核心服务或工作流运行时，维护模块依赖、分支选择、上下文、运行记录与错误传播，覆盖一条从用户请求、工具调用到结果返回的完整执行链路。}
+  \resumeItem{关键优化}{基于离线评测、压力测试和线上日志定位效果、性能或稳定性瓶颈，针对召回策略、资源复用或失败路径进行优化，并用统一口径对比优化前后的差异。}
+  \resumeItem{交付价值}{通过自动化测试、版本快照和灰度发布保证配置变更不会影响已发布应用，沉淀接口说明、评测脚本与排障手册，说明方案对团队协作或业务流程产生的可验证价值。}
+\end{resumeItemize}
+
+\resumeSection{个人项目}
+\projectTitle{项目名称}{个人角色}{起止时间}{https://github.com/yourname/project}{github.com/yourname/project}
+\begin{resumeItemize}
+  \resumeItem{方案设计}{用一句话说明项目目标和应用场景，围绕真实约束设计数据处理、核心算法、服务接口与结果展示模块，交代关键数据流和技术选择依据，避免只罗列工具名称。}
+  \resumeItem{实现与评测}{独立完成关键模块、训练或部署流程，加入失败重试、答案清洗和自动评测；在明确的数据集、测试条件与指标口径下报告效果，并提供复现实验的脚本或文档。}
+\end{resumeItemize}
+
+\resumeSection{开源贡献}
+\projectTitle{开源项目名称}{贡献者角色}{贡献时间}{}{}
+\resumeLabel{贡献}(\href{https://github.com/owner/repo/pull/1}{PR \#1}) 说明你定位并修复的问题、采用的最小方案、补充的测试，以及贡献已合并或验证的状态。\par
 
 \end{document}
