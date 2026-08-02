@@ -20,15 +20,24 @@
   linkcolor=black,
 }
 
-% 优先使用跨平台字体；若本机没有对应字体，则回退到 macOS 常见字体。
+% 优先使用跨平台字体，再回退到 macOS 字体或 TeX Live 自带的 Fandol 字体。
 \IfFontExistsTF{TeX Gyre Termes}{\setmainfont{TeX Gyre Termes}}{\setmainfont{Times New Roman}}
-\IfFontExistsTF{Noto Serif CJK SC}{\setCJKmainfont{Noto Serif CJK SC}}{\setCJKmainfont{Songti SC}}
+\IfFontExistsTF{Noto Serif CJK SC}{%
+  \setCJKmainfont{Noto Serif CJK SC}
+}{%
+  \IfFontExistsTF{Songti SC}{\setCJKmainfont{Songti SC}}{\setCJKmainfont{FandolSong-Regular.otf}}
+}
 \IfFontExistsTF{Noto Sans CJK SC}{%
   \setCJKsansfont{Noto Sans CJK SC}
   \newCJKfontfamily\resumeheiti{Noto Sans CJK SC}
 }{%
-  \setCJKsansfont{Heiti SC}
-  \newCJKfontfamily\resumeheiti{Heiti SC}
+  \IfFontExistsTF{Heiti SC}{%
+    \setCJKsansfont{Heiti SC}
+    \newCJKfontfamily\resumeheiti{Heiti SC}
+  }{%
+    \setCJKsansfont{FandolHei-Regular.otf}
+    \newCJKfontfamily\resumeheiti{FandolHei-Regular.otf}
+  }
 }
 
 \pagestyle{empty}

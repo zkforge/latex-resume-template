@@ -52,7 +52,7 @@ xelatex main.tex
 - XeLaTeX
 - `latexmk`
 
-模板优先使用 `TeX Gyre Termes`、`Noto Serif CJK SC`、`Noto Sans CJK SC` 等跨平台字体；本机缺少这些字体时，会回退到 macOS 常见中文字体。
+模板优先使用 `TeX Gyre Termes`、`Noto Serif CJK SC`、`Noto Sans CJK SC` 等跨平台字体；缺少这些字体时，会回退到 macOS 常见中文字体或 TeX Live 自带的 Fandol 字体。
 
 ## 清理构建文件
 
