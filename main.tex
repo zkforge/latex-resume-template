@@ -163,49 +163,57 @@
 
 \resumeSection{教育经历}
 \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{6.0cm}>{\raggedright\arraybackslash}X>{\raggedleft\arraybackslash}p{3.0cm}@{}}
-  \resumeEducation{示例大学{\color{resumeMuted}（985/双一流）}}{硕士｜人工智能学院｜人工智能专业}{\textbf{2023.9} - \textbf{2026.7}}
-  \multicolumn{3}{@{}l@{}}{{\hspace{0.45em}\zihao{5}\color{resumeMuted}排名前 \textbf{5\%}、国家奖学金、预计毕业时间 2026 年 7 月}}\\
-  \resumeEducation{示例大学{\color{resumeMuted}（双一流）}}{本科｜计算机学院｜软件工程专业}{\textbf{2019.9} - \textbf{2023.7}}
-  \multicolumn{3}{@{}l@{}}{{\hspace{0.45em}\zihao{5}\color{resumeMuted}排名前 \textbf{10\%}、校级一等奖学金、优秀毕业生}}\\
+  \resumeEducation{示例大学{\color{resumeMuted}（双一流）}}{硕士｜计算机科学与技术学院｜计算机技术专业}{\textbf{2023.9} - \textbf{2026.6}}
+  \multicolumn{3}{@{}l@{}}{{\hspace{0.45em}\zihao{5}\color{resumeMuted}校一等奖学金、优秀研究生干部}}\\
+  \resumeEducation{示例工业大学{\color{resumeMuted}（省属重点）}}{本科｜信息工程学院｜软件工程专业}{\textbf{2019.9} - \textbf{2023.6}}
+  \multicolumn{3}{@{}l@{}}{{\hspace{0.45em}\zihao{5}\color{resumeMuted}校级三好学生、学业奖学金、优秀毕业生}}\\
 \end{tabularx}
 
 \resumeSection{技能}
-\resumeLabel{编程}熟悉 Python、PyTorch，了解 PostgreSQL、Redis，能实现数据预处理、训练/微调与推理评测流程。\par
-\resumeLabel{专业方向}熟悉 RAG 检索链路、Agent 工具调用、多轮记忆、LoRA 微调、vLLM 推理部署与自动评测闭环。\par
-\resumeLabel{工程化}熟悉 FastAPI、Docker、Git、Linux 及 AI 编程工具，具备镜像构建、多服务编排、环境配置与问题排查能力。
+\resumeLabel{编程}熟悉 Java、Golang，掌握 MySQL、Redis 与消息队列，能完成服务端开发、数据建模与查询优化。\par
+\resumeLabel{专业方向}了解推荐系统召回/排序链路、向量检索与 A/B 实验评估流程。\par
+\resumeLabel{工程化}熟悉 Docker、Kubernetes、Git、CI/CD，具备容器化部署、监控告警与问题排查能力。\par
+\resumeLabel{工具}熟练使用 IntelliJ IDEA、Postman、DBeaver 等开发调试工具，能高效完成代码评审与问题定位。
 
 \resumeSection{实习经历}
-\experienceTitle{示例科技有限公司}{AI 应用开发实习生}{2025.6 - 2025.9}
-\resumeLabel{示例产品一｜智能审核平台}\par
+\experienceTitle{示例网络科技有限公司}{后端开发实习生}{2025.7 - 2025.10}
+\resumeLabel{智能客服工单系统}\par
 \begin{resumeItemize}
-  \resumeItem{多模态审核链路}{负责业务文档的多模态审核链路，结合多模态大模型、目标检测与 OCR 复核生成可定位、可回溯的结构化报告，将典型单文档审核耗时由约 \textbf{2 小时}压缩至 \textbf{20 分钟以内}。}
-  \resumeItem{长文档解析}{基于 MinerU、PyMuPDF 解析 PDF、Word 及在线文档，将章节、表格、图片与位置信息绑定；按章节分块并行审核长文档，并通过页码、坐标和 block\_id 回溯结果。}
-  \resumeItem{Agent 与部署}{基于 LangGraph 构建多轮审核 Agent，通过 asyncio 与 WebSocket 实现批量并发和进度推送；使用 Docker Compose 编排 FastAPI、MySQL、向量库与对象存储等服务。}
+  \resumeItem{自动路由}{基于文本特征与历史解决记录构建工单自动分类与路由，将人工分单平均耗时由约 \textbf{10 分钟}降至 \textbf{2 分钟以内}，分单准确率约 \textbf{85\%}。}
+  \resumeItem{数据与接口}{搭建多渠道工单数据的定时同步管道，完成清洗、去重与归一化后落库，提供分页查询与统计报表接口。}
+  \resumeItem{服务治理}{使用 Spring Boot 提供接口服务，集成 RocketMQ 异步处理与 Redis 缓存，完善日志、监控与告警。}
 \end{resumeItemize}
 \vspace{0.12em}
-\resumeLabel{示例产品二｜智能体开发平台}\par
+\resumeLabel{用户画像标签平台}\par
 \begin{resumeItemize}
-  \resumeItem{RAG 检索链路}{负责多格式文档解析、切分、Embedding、向量化、Dense/BM25 混合检索、RRF 融合与 Rerank 精排，在内部评测集上将 Top-5 召回率由约 \textbf{72\%} 提升至 \textbf{94\%}。}
-  \resumeItem{工作流运行时}{负责可视化 Agent 工作流与后端执行语义对齐，覆盖条件分支、循环、并行、表单中断恢复及工具调用等节点，维护上下文、运行记录与错误传播。}
-  \resumeItem{应用发布与扩展}{实现草稿调试与不可变版本快照，通过 Provider 插件统一接入 Chat、Embedding 与 Rerank 模型，实现 MCP/Skill、OpenAI 兼容接口和 SSE 流式输出；完善 Dockerfile 与锁文件，维护稳定部署流程。}
+  \resumeItem{标签计算}{参与用户标签体系的定义与计算任务，基于行为日志回流计算活跃、偏好等基础标签，支撑运营人群圈选。}
+  \resumeItem{实时管道}{编写 Flink 流式任务将点击日志实时聚合为标签指标，配置任务依赖与失败重试，保障数据按时产出。}
+  \resumeItem{可视化}{开发标签查询与人群圈选的 Web 界面，配合 BI 报表完成活动效果的日常评估。}
 \end{resumeItemize}
 
 \resumeSection{项目经历}
-\projectTitle{多轮咨询的智能问答助手}{个人全栈开发}{2025.1 - 2025.3}{https://github.com/yourname/project}{github.com/yourname/project}
-\resumeLabel{项目简介}面向多轮次、信息不完整的咨询场景，构建“信息采集 + 业务 Skill + 专业 Agent + 协作编排”的问答系统，解决背景信息缺失、复杂问题拆解不足和安全边界不稳定的问题。\par
+\projectTitle{高并发限时秒杀系统}{个人全栈开发}{2025.1 - 2025.3}{https://github.com/yourname/project}{github.com/yourname/project}
+\resumeLabel{项目简介}面向电商大促高并发场景，设计“预扣库存 + 异步下单 + 最终扣减”的秒杀方案，解决超卖、缓存穿透与订单积压问题。\par
 \vspace{0.12em}
 \begin{resumeItemize}
-  \resumeItem{分层架构}{将检索、评估、建议和研究等能力拆分为 \textbf{9} 个业务 Skill；定义路由 Agent 和 \textbf{3} 个 Worker Agent，实现路由拆解与能力调用的职责解耦。}
-  \resumeItem{路由机制}{构建“信息采集 → 快速咨询 → 协作编排”的三路路由机制：背景不足时由 Agent 逐轮追问关键信息；常见低风险咨询进入单 Agent 快速路径，复杂问题由主 Agent 拆解后交给多个 Worker Agent 并行处理；路由准确率达 \textbf{95\%}，并相对基线将常见咨询延迟成本降低约 \textbf{75\%}。}
-  \resumeItem{记忆与安全}{实现短期会话历史与长期记忆机制，维护会话内最近 \textbf{5} 轮关键上下文，支持跨会话相似案例检索；通过 Harness 约束 Agent 能力边界、输出格式与安全策略，并自动修复不合规输出，综合得分达到 \textbf{4.5/5}。}
-  \resumeItem{评测闭环}{在自建的多轮咨询样例集上结合 LLM-as-a-Judge 与人工抽检评估，相比基线显著提升最终回答的完整性与稳定性，并沉淀可复现的评测脚本与样例集。}
+  \resumeItem{整体架构}{前后端分离，以 Spring Boot + Redis + RocketMQ 构建微服务，将秒杀接口与订单、库存服务解耦，支撑瞬时高流量写入。}
+  \resumeItem{库存一致性}{使用 Redis Lua 脚本原子扣减库存，配合消息队列异步创建订单并最终扣减，压测下无超卖，接口成功率 \textbf{99.5\%}。}
+  \resumeItem{缓存与防护}{热点数据采用本地缓存 + Redis 二级缓存，实现缓存穿透、击穿与雪崩的三重防护，降低数据库压力约 \textbf{60\%}。}
+  \resumeItem{压测优化}{使用 JMeter 对下单链路压测，通过连接池、批量写入与限流熔断优化，单机接口 QPS 由约 \textbf{500} 提升至 \textbf{2000}。}
+\end{resumeItemize}
+
+\projectTitle{即时消息推送网关}{个人全栈开发}{2024.9 - 2024.12}{}{}
+\begin{resumeItemize}
+  \resumeItem{连接管理}{基于 Netty 实现长连接、心跳检测与断线重连机制，支持设备在线状态管理与消息路由。}
+  \resumeItem{可靠投递}{设计消息确认与重发机制，配合离线消息存储，保证消息不丢失、不重复，在线送达率约 \textbf{99.9\%}。}
+  \resumeItem{性能优化}{通过连接池、批量写盘与读写分离优化，单机支撑约 \textbf{5 万}并发连接，平均推送延迟低于 \textbf{100ms}。}
 \end{resumeItemize}
 
 \resumeSection{开源贡献}
-\projectTitle{开源项目示例一\hspace{0.3em}\projectStars{100+ stars}}{Merged PR Contributor}{2025.4}{}{}
-\resumeLabel{贡献}(\resumeUrl{https://github.com/owner/repo/pull/1}{\#1}) 修复终端未加载用户 shell 配置的问题，统一使用 POSIX \texttt{sh} 执行脚本，补充回归测试。\par
+\projectTitle{开源工具示例一\hspace{0.3em}\projectStars{1k+ stars}}{Merged PR Contributor}{2025.4}{}{}
+\resumeLabel{贡献}(\resumeUrl{https://github.com/owner/repo/pull/1}{\#1}) 修复日志轮转在 Windows 下路径分隔符处理错误的问题，统一使用 \texttt{os.path} 拼接并补充单元测试。\par
 \vspace{0.12em}
-\projectTitle{开源项目示例二\hspace{0.3em}\projectStars{50+ stars}}{Merged PR Contributor}{2025.5 - 2025.6}{}{}
-\resumeLabel{贡献}(\resumeUrl{https://github.com/owner/repo/pull/2}{\#2}、\resumeUrl{https://github.com/owner/repo/pull/3}{\#3}) 修复生产环境可选依赖安装；为内置子 Agent 增加隔离上下文并兼容严格模型提供商，补充回归测试。\par
+\projectTitle{开源工具示例二\hspace{0.3em}\projectStars{500+ stars}}{Merged PR Contributor}{2025.5 - 2025.6}{}{}
+\resumeLabel{贡献}(\resumeUrl{https://github.com/owner/repo/pull/2}{\#2}、\resumeUrl{https://github.com/owner/repo/pull/3}{\#3}) 为 HTTP 客户端增加超时重试与指数退避，修复长耗时请求偶发超时问题，并补充回归测试。\par
 
 \end{document}
