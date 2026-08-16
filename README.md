@@ -38,10 +38,12 @@ xelatex main.tex
 
 ## 自定义方式
 
-- 修改 `main.tex` 顶部的颜色变量，可以整体调整主色、分隔线与角色强调色。
-- 替换姓名、联系方式、求职意向、教育经历、技能、实习经历、个人项目和开源贡献中的占位文本。
-- 如需使用证件照，将图片保存为 `assets/photo.png`；若该文件不存在，模板会自动显示占位框。
+- 修改 `main.tex` 顶部的颜色变量（正文、次要信息、页眉图标、分隔线、占位框底色），可以整体调整配色风格。
+- 替换姓名、联系方式、求职意向、教育经历、技能、实习经历、项目经历和开源贡献中的占位文本。
+- 联系方式使用 FontAwesome 5 图标（`\resumeContactIcon{\faPhone}` 等），可参考 [FontAwesome 5 图标列表](https://fontawesome.com/v5/icons) 换成其他图标。
+- 如需使用证件照，将图片保存为 `assets/photo.png`；若该文件不存在，模板会自动在页面右上角显示占位框。
 - `\projectTitle` 的项目链接可以留空；留空时整行链接会自动隐藏。
+- 开源条目可追加仓库 star 数，例如 `\projectTitle{项目名\hspace{0.3em}\projectStars{100+ stars}}{...}`。
 - 经历要点建议采用“问题/职责 → 技术方案 → 可验证结果”的结构，优先保留与目标岗位直接相关的内容。
 
 ## 编译环境
@@ -52,7 +54,7 @@ xelatex main.tex
 - XeLaTeX
 - `latexmk`
 
-模板优先使用 `TeX Gyre Termes`、`Noto Serif CJK SC`、`Noto Sans CJK SC` 等跨平台字体；缺少这些字体时，会回退到 macOS 常见中文字体或 TeX Live 自带的 Fandol 字体。
+模板优先使用 `TeX Gyre Termes`、`Noto Serif CJK SC`、`Noto Sans CJK SC` 等跨平台字体；缺少这些字体时，会回退到 macOS 常见中文字体或 TeX Live 自带的 Fandol 字体。联系方式的图标依赖 `fontawesome5` 宏包（TeX Live 完整版自带）。
 
 ## 清理构建文件
 

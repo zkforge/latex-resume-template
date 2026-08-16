@@ -1,18 +1,21 @@
 % !TEX program = xelatex
-\documentclass[UTF8,10pt,a4paper,fontset=none]{ctexart}
+\documentclass[UTF8,zihao=5,a4paper,fontset=none]{ctexart}
 
 \usepackage[
-  left=1.25cm,
-  right=1.25cm,
-  top=1.0cm,
-  bottom=1.0cm,
+  left=1.2cm,
+  right=1.2cm,
+  top=0.9cm,
+  bottom=0.9cm,
 ]{geometry}
 \usepackage{array}
 \usepackage{enumitem}
 \usepackage{graphicx}
+\usepackage{fontawesome5}
 \usepackage{hyperref}
 \usepackage{tabularx}
+\usepackage{tikz}
 \usepackage{xcolor}
+\usepackage{xeCJKfntef}
 
 \hypersetup{
   colorlinks=true,
@@ -20,7 +23,7 @@
   linkcolor=black,
 }
 
-% 优先使用跨平台字体，再回退到 macOS 字体或 TeX Live 自带的 Fandol 字体。
+% 优先使用跨平台字体，再回退到 macOS 常见字体或 TeX Live 自带的 Fandol 字体。
 \IfFontExistsTF{TeX Gyre Termes}{\setmainfont{TeX Gyre Termes}}{\setmainfont{Times New Roman}}
 \IfFontExistsTF{Noto Serif CJK SC}{%
   \setCJKmainfont{Noto Serif CJK SC}
@@ -40,6 +43,8 @@
   }
 }
 
+\linespread{1.15}
+
 \pagestyle{empty}
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0pt}
@@ -51,45 +56,57 @@
 % 模板颜色集中放在这里，后续只需要改这一处即可整体换风格。
 \definecolor{resumeText}{HTML}{1E1E1E}
 \definecolor{resumeMuted}{HTML}{555555}
-\definecolor{resumeBlue}{HTML}{1D3557}
-\definecolor{resumeRule}{HTML}{1D3557}
-\definecolor{resumeAccent}{HTML}{8A4B12}
+\definecolor{resumeHeaderMuted}{HTML}{666666}
+\definecolor{resumeRule}{HTML}{000000}
 \definecolor{resumePhotoBg}{HTML}{F7F7F7}
 \color{resumeText}
 
 \newcommand{\resumeSection}[1]{%
-  \vspace{0.55em}%
-  {\resumeheiti\Large\bfseries\color{resumeBlue}#1}\par
-  \vspace{0.12em}%
-  {\color{resumeRule}\hrule height 2.2pt}%
-  \vspace{0.35em}%
+  \vspace{0.45em}%
+  {\resumeheiti\zihao{4}\bfseries\color{black}#1}\par
+  \vspace{0.08em}%
+  {\color{resumeRule}\hrule height 1.4pt}%
+  \vspace{0.28em}%
 }
 
 \newcommand{\resumeContactRow}[4]{%
-  #1: #2 & #3: #4\\[-0.08em]
+  #1\hspace{0.35em}#2 & #3\hspace{0.35em}#4\\[-0.08em]
+}
+
+\newcommand{\resumeContactIcon}[1]{%
+  \vphantom{Tel:}{\color{resumeHeaderMuted}\raisebox{-0.08ex}[0pt][0pt]{\fontsize{10}{10}\selectfont #1}}%
+}
+
+\newcommand{\resumeUrl}[2]{%
+  \href{#1}{\CJKunderline{#2}}%
 }
 
 \newcommand{\resumeEducation}[3]{%
-  {\resumeheiti\fontsize{11pt}{13.2pt}\selectfont\bfseries #1} & #2 & \hfill #3\\
+  {\resumeheiti\zihao{-4}\bfseries #1} & #2 & \hfill #3\\
 }
 
 \newcommand{\experienceTitle}[3]{%
   \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}X r@{}}
-    {\resumeheiti\fontsize{11pt}{13.2pt}\selectfont\bfseries #1} &
-    {{\bfseries\color{resumeAccent}#2} {\color{resumeMuted}|} {\bfseries\color{resumeBlue}#3}}\\
+    {\resumeheiti\zihao{-4}\bfseries #1}{\zihao{5}\color{resumeMuted}｜#2} &
+    {\zihao{5}\bfseries\color{black}#3}\\
   \end{tabularx}\par
-  \vspace{0.08em}%
+  \vspace{0.06em}%
 }
 
 \newcommand{\projectTitle}[5]{%
   \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}X r@{}}
-    {\large\textbf{#1}} & {{\bfseries\color{resumeAccent}#2} {\color{resumeMuted}|} {\bfseries\color{resumeBlue}#3}}\\[-0.05em]
+    {\zihao{-4}\textbf{#1}}{\zihao{5}\color{resumeMuted}｜#2} & {\zihao{5}\bfseries\color{black}#3}\\[-0.05em]
     \if\relax\detokenize{#4}\relax
     \else
-      \multicolumn{2}{@{}l@{}}{{\color{resumeMuted}项目链接: }\href{#4}{#5}}\\
+      \multicolumn{2}{@{}l@{}}{{\color{resumeMuted}项目链接: }\resumeUrl{#4}{#5}}\\
     \fi
   \end{tabularx}\par
-  \vspace{0.12em}%
+  \vspace{0.06em}%
+}
+
+% 可选：在项目/开源条目后追加仓库 star 数，如 \projectStars{100+ stars}。
+\newcommand{\projectStars}[1]{%
+  {\zihao{5}\mdseries\color{resumeMuted}（#1）}%
 }
 
 \newcommand{\resumeLabel}[1]{%
@@ -101,68 +118,74 @@
 }
 
 \newenvironment{resumeItemize}{%
-  \begin{enumerate}[
-    label=\textbf{\arabic*）},
-    leftmargin=1.8em,
-    itemsep=0.08em,
-    topsep=0.12em,
-    parsep=0pt,
+  \begin{itemize}[
+    label=\textbullet,
+    leftmargin=1.2em,
+    itemsep=0em,
+    topsep=0em,
+    parsep=0.20em,
     partopsep=0pt
   ]%
+  \setlength{\emergencystretch}{0.5em}%
 }{%
-  \end{enumerate}%
+  \end{itemize}%
 }
 
-% 若需要使用真实照片，请把图片放入 assets/photo.png，并将下方路径改为该文件。
+% 如需使用证件照，把图片保存为 assets/photo.png；文件不存在时自动显示占位框。
 \newcommand{\resumePhotoFile}{assets/photo.png}
 \newcommand{\resumePhoto}{%
   \IfFileExists{\resumePhotoFile}{%
-    \includegraphics[height=2.7cm]{\resumePhotoFile}%
+    \includegraphics[height=2.5cm]{\resumePhotoFile}%
   }{%
     \fcolorbox{resumeRule}{resumePhotoBg}{%
-      \parbox[c][2.55cm][c]{2.05cm}{\centering\small 证件照}%
+      \parbox[c][2.45cm][c]{1.9cm}{\centering\small 证件照}%
     }%
   }%
 }
 
 \begin{document}
 
+\begin{tikzpicture}[remember picture, overlay]
+  \node[anchor=north east, inner sep=0pt]
+    at ([xshift=-1.2cm,yshift=-0.9cm]current page.north east)
+    {\resumePhoto};
+\end{tikzpicture}
+
 \begin{minipage}[c]{0.80\textwidth}
-  {\Huge\textbf{你的姓名}}\par
+  {\zihao{-2}\textbf{你的姓名}}\par
   \vspace{0.22em}
   \begin{tabular*}{\textwidth}{@{}p{0.38\textwidth}@{\extracolsep{\fill}}p{0.56\textwidth}@{}}
-    \resumeContactRow{Tel}{000-0000-0000}{Email}{\href{mailto:name@example.com}{name@example.com}}
-    \resumeContactRow{Blog}{\href{https://example.com}{example.com}}{GitHub}{\href{https://github.com/yourname}{github.com/yourname}}
-    \multicolumn{2}{@{}l@{}}{{\resumeheiti\bfseries\color{resumeBlue}目标岗位｜毕业年份/实习类型｜到岗时间｜可实习时长}}\\
+    \resumeContactRow{\resumeContactIcon{\faPhone}}{000-0000-0000}{\resumeContactIcon{\faEnvelope}}{\resumeUrl{mailto:name@example.com}{name@example.com}}
+    \resumeContactRow{\resumeContactIcon{\faGlobe}}{\resumeUrl{https://example.com}{example.com}}{\resumeContactIcon{\faGithub}}{\resumeUrl{https://github.com/yourname}{github.com/yourname}}
+    \multicolumn{2}{@{}l@{}}{{\resumeheiti\bfseries\color{resumeHeaderMuted}目标岗位｜每周可到岗 X 天及以上｜到岗时间｜可连续实习 X 个月}}\\
   \end{tabular*}
-\end{minipage}
-\hfill
-\begin{minipage}[c]{0.16\textwidth}
-  \raggedleft
-  \resumePhoto
 \end{minipage}
 
 \resumeSection{教育经历}
 \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{6.0cm}>{\raggedright\arraybackslash}X>{\raggedleft\arraybackslash}p{3.0cm}@{}}
-  \resumeEducation{学校名称{\color{resumeMuted}（院校标签）}}{学历｜学院｜专业方向}{\textbf{起止时间}}
-  \resumeEducation{学校名称{\color{resumeMuted}（院校标签）}}{学历｜学院｜专业方向}{\textbf{起止时间}}
+  \resumeEducation{学校名称{\color{resumeMuted}（院校标签）}}{硕士｜学院｜专业方向}{\textbf{起止年月}}
+  \multicolumn{3}{@{}l@{}}{{\hspace{0.45em}\zihao{5}\color{resumeMuted}排名前 X\%、获奖或荣誉、预计毕业时间}}\\
+  \resumeEducation{学校名称{\color{resumeMuted}（院校标签）}}{本科｜学院｜专业方向}{\textbf{起止年月}}
+  \multicolumn{3}{@{}l@{}}{{\hspace{0.45em}\zihao{5}\color{resumeMuted}排名前 X\%、获奖或荣誉}}\\
 \end{tabularx}
 
-\resumeSection{技能}
-\resumeLabel{语言}语言证书或沟通能力。\par
-\resumeLabel{编程}主要语言、框架、数据库及数据处理能力。\par
-\resumeLabel{专业方向}与你的目标岗位直接相关的模型、算法或系统能力。\par
-\resumeLabel{工程化}部署、测试、版本控制、日志排查与服务联调能力。\par
-\resumeLabel{工具}开发工具、协作工具、实验管理或可复现工程能力。
+% 技能节可选；不需要时直接删除这几行注释即可。
+% \resumeSection{技能}
+% \resumeLabel{语言}语言证书或沟通能力。\par
+% \resumeLabel{编程}主要语言、框架、数据库及数据处理能力。\par
+% \resumeLabel{专业方向}与目标岗位直接相关的模型、算法或系统能力。\par
+% \resumeLabel{工程化}部署、测试、版本控制、日志排查与服务联调能力。\par
+% \resumeLabel{工具}开发工具、协作工具、实验管理或可复现工程能力。
 
 \resumeSection{实习经历}
-\experienceTitle{公司名称}{岗位名称}{起止时间}
+\experienceTitle{公司名称}{岗位名称}{起止年月}
 \resumeLabel{业务或产品名称一}\par
 \begin{resumeItemize}
   \resumeItem{核心方案}{针对原有流程在准确率、处理时延或人工成本上的限制，设计“输入解析 → 任务拆分 → 模型处理 → 结果校验”的完整链路，说明你负责的模块、关键设计取舍及它解决的具体问题。}
   \resumeItem{数据与模型}{构建数据解析、清洗、检索、训练或推理流程，将原始内容与页面位置、业务字段等证据绑定；通过分块、路由或多阶段复核处理上下文限制，并让最终结果可以回溯。}
   \resumeItem{工程结果}{实现支持并发、超时、重试、取消和状态回调的任务执行机制，补充日志、缓存、监控或部署流程；在明确的测试条件下，将关键指标由基线值提升到目标值。}
 \end{resumeItemize}
+\vspace{0.12em}
 \resumeLabel{业务或产品名称二}\par
 \begin{resumeItemize}
   \resumeItem{系统实现}{负责核心服务或工作流运行时，维护模块依赖、分支选择、上下文、运行记录与错误传播，覆盖一条从用户请求、工具调用到结果返回的完整执行链路。}
@@ -170,15 +193,17 @@
   \resumeItem{交付价值}{通过自动化测试、版本快照和灰度发布保证配置变更不会影响已发布应用，沉淀接口说明、评测脚本与排障手册，说明方案对团队协作或业务流程产生的可验证价值。}
 \end{resumeItemize}
 
-\resumeSection{个人项目}
-\projectTitle{项目名称}{个人角色}{起止时间}{https://github.com/yourname/project}{github.com/yourname/project}
+\resumeSection{项目经历}
+\projectTitle{项目名称}{个人角色}{起止年月}{https://github.com/yourname/project}{github.com/yourname/project}
+\resumeLabel{项目简介}用一句话说明项目目标和应用场景，围绕真实约束设计核心模块，交代关键数据流和技术选择依据，避免只罗列工具名称。\par
+\vspace{0.12em}
 \begin{resumeItemize}
-  \resumeItem{方案设计}{用一句话说明项目目标和应用场景，围绕真实约束设计数据处理、核心算法、服务接口与结果展示模块，交代关键数据流和技术选择依据，避免只罗列工具名称。}
+  \resumeItem{方案设计}{说明你负责的模块与职责划分，给出关键设计取舍（如路由策略、记忆机制、约束方式）及它们解决的问题。}
   \resumeItem{实现与评测}{独立完成关键模块、训练或部署流程，加入失败重试、答案清洗和自动评测；在明确的数据集、测试条件与指标口径下报告效果，并提供复现实验的脚本或文档。}
 \end{resumeItemize}
 
 \resumeSection{开源贡献}
 \projectTitle{开源项目名称}{贡献者角色}{贡献时间}{}{}
-\resumeLabel{贡献}(\href{https://github.com/owner/repo/pull/1}{PR \#1}) 说明你定位并修复的问题、采用的最小方案、补充的测试，以及贡献已合并或验证的状态。\par
+\resumeLabel{贡献}(\resumeUrl{https://github.com/owner/repo/pull/1}{\#1}) 说明你定位并修复的问题、采用的最小方案、补充的测试，以及贡献已合并或验证的状态。\par
 
 \end{document}
